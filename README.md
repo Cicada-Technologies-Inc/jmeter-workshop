@@ -1,6 +1,6 @@
 # JMeter
 
-JMeter is a tool designed to load test Web Applications. However, it can also be used to run simple functional tests.
+JMeter is a tool designed to load-test Web Applications. However, it can also be used to run simple functional tests.
 
 It simulates a group of users sending requests to a target server and returns statistics of the performance of the target application.
 

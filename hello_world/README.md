@@ -37,7 +37,7 @@ Which produces the following response:
 Notice how the json data we passed is returned by the service in the `json` field.
 
 
-We will extract the value of `my_var` from the json response, store is as `extracted_var`, and then pass it as a parameter in a second request to httpbin:
+We will extract the value of `my_var` from the json response, store it as `extracted_var`, and then pass it as a parameter in a second request to httpbin:
 
 ```
 curl -X GET "https://httpbin.org/get?my_param=<extracted_var>"
@@ -79,17 +79,17 @@ Add the following elements to the test plan's "Hello World" node; each element c
 
 ### Configuration
 
-Each of the elements added in the previous step can be configured to specify its desired behaviour.
+Each of the elements added in the previous step should be configured to specify their desired behaviour.
 
 Thread Group:
 - Leave the default configuration, which is set to one user and one request only.
 
 Thread Group > HTTP Request 1:
-- set `protocol` to "https"
-- set `server name` to "httpbin.org"
-- set `HTTP Request verb` to "POST"
-- set `HTTP Request Path` to "/anything"
-- set `Body Data` to
+- Set `protocol` to "https"
+- Set `server name` to "httpbin.org"
+- Set `HTTP Request verb` to "POST"
+- Set `HTTP Request Path` to "/anything"
+- Set `Body Data` to
   ```
   {
     "my_var":"my_val"
@@ -104,11 +104,11 @@ Thread Group > HTTP Request 1 > JSON Extractor:
 - Set "JSON Path expressions" to `$['json']['my_var']`, note how this matches the path to the data we want to extract from the first request's response.
 
 Thread Group > HTTP Request 2:
-- set `protocol` to "https"
-- set `server name` to "httpbin.org"
-- set `HTTP Request verb` to "GET"
-- set `HTTP Request Path` to "/get"
-- add to `Parameters` "my_param" with value "${extracted_var}", this fetches the value of `extracted_var` that was defined in the last step through the JSON Extractor.
+- Set `protocol` to "https"
+- Set `server name` to "httpbin.org"
+- Set `HTTP Request verb` to "GET"
+- Set `HTTP Request Path` to "/get"
+- Add to `Parameters` "my_param" with value "${extracted_var}", this fetches the value of `extracted_var` that was defined in the last step through the JSON Extractor.
 
 Thread Group > HTTP Request 2 > JSON Assertion:
 - set `Assert JSON path exists` to `$['args']['my_param']`, note how this matches the path to the data whose presence we want to vlidate from the second request's response.
